@@ -54,14 +54,14 @@ namespace _04Prokhorov
             }
             Person person = new Person(FirstName.Text, LastName.Text, Email.Text, DatePicker.SelectedDate.Value);
             person.InitializeAsync();
-            FirstNameAns.Content = "Ім'я: " + person.Name;
-            LastNameAns.Content = "Прізвище: " + person.Surname;
-            EmailAns.Content = "Електронна пошта: " + person.EmailAddress;
-            BirthDayAns.Content = "Дата народження: " + person.DateOfBirth.ToShortDateString();
-            IsAdult.Text = "Чи повнолітній: " + person.IsAdult;
-            HoroscopeEnglish.Text = "Знак сонця: " + person.SunSign;
-            HoroscopeAsian.Text = "Знак китайського зодіаку: " + person.ChineseSign;
-            IsBirthday.Text = "Чи є сьогодні днем народження: " + person.IsBirthday;
+            FirstNameAns.Content = "Name : " + person.Name;
+            LastNameAns.Content = "Surname : " + person.Surname;
+            EmailAns.Content = "E-mail: " + person.EmailAddress;
+            BirthDayAns.Content = "D of birth: " + person.DateOfBirth.ToShortDateString();
+            IsAdult.Text = "Adult: " + person.IsAdult;
+            HoroscopeEnglish.Text = "Western: " + person.SunSign;
+            HoroscopeAsian.Text = "Chinese: " + person.ChineseSign;
+            IsBirthday.Text = "B-day: " + person.IsBirthday;
 
 
         }
