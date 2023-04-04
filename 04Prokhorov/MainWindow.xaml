@@ -1,0 +1,35 @@
+﻿<Window x:Class="_04Prokhorov.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_04Prokhorov"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="636*"/>
+            <ColumnDefinition Width="115*"/>
+        </Grid.ColumnDefinitions>
+        <DatePicker x:Name="DatePicker" HorizontalAlignment="Left" Margin="30,157,0,0" VerticalAlignment="Top" SelectedDateChanged="DateChanged" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="HoroscopeEnglish" HorizontalAlignment="Left" Margin="115,149,0,0" TextWrapping="Wrap" Text="Західний гороскоп " VerticalAlignment="Top" Height="16" RenderTransformOrigin="0.49,0.61" Grid.Column="1"/>
+        <TextBlock x:Name="HoroscopeAsian" HorizontalAlignment="Left" Margin="115,168,0,0" TextWrapping="Wrap" Text="Китайський гороскоп " VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBlock x:Name="IsAdult" HorizontalAlignment="Left" Margin="115,184,0,0" TextWrapping="Wrap" Text="Дорослий " VerticalAlignment="Top" Height="16" RenderTransformOrigin="0.49,0.61" Grid.Column="1"/>
+        <TextBlock x:Name="IsBirthday" HorizontalAlignment="Left" Margin="115,200,0,0" TextWrapping="Wrap" Text="День народження " VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox x:Name="FirstName" HorizontalAlignment="Left" Margin="30,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="FirstName_TextChanged" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="LastName" HorizontalAlignment="Left" Margin="30,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="LastName_TextChanged" Grid.ColumnSpan="2"/>
+        <Label  Content="Ім'я" HorizontalAlignment="Left" Margin="30,42,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label  Content="Прізвище" HorizontalAlignment="Left" Margin="30,86,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="Дата народження" HorizontalAlignment="Left" Margin="30,130,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Label Content="E-mail" HorizontalAlignment="Left" Margin="30,181,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="Email" HorizontalAlignment="Left" Margin="30,207,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="Email_TextChanged" Grid.ColumnSpan="2"/>
+        <Button x:Name="ProceedButton" Content="Proceed" HorizontalAlignment="Left" Margin="30,236,0,0" VerticalAlignment="Top" Width="83" Click="ProceedButton_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <Label x:Name="FirstNameAns" Content="Ім'я" HorizontalAlignment="Left" Margin="115,45,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="LastNameAns" Content="Прізвище" HorizontalAlignment="Left" Margin="115,71,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="BirthDayAns" Content="Дата народження" HorizontalAlignment="Left" Margin="115,97,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Label x:Name="EmailAns" Content="E-mail" HorizontalAlignment="Left" Margin="115,123,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <DataGrid x:Name="PersonList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="335,0,0,0" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+    </Grid>
+</Window>
