@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace _04Prokhorov.Model
 {
-    internal class Person
+    [Serializable]
+    internal class Person 
     {
         private string _name;
         private string _surname;

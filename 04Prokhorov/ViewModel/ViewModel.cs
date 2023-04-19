@@ -10,11 +10,16 @@ using System.Collections;
 using _04Prokhorov.Model;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace _04Prokhorov.ViewModel
 {
     internal class ViewModel
     {
+        public static List<Person> Persons = new List<Person>();
+
         private static ListSortDirection? sortDirection = null;
 
         public static bool CalculateAge(DateTime? birthDate)
@@ -26,11 +31,11 @@ namespace _04Prokhorov.ViewModel
                 if (birthDate > today.AddYears(-age)) age--;
                 if (age > 135)
                 {
-                    throw new AgeTooLowException("AgeTooLowException");
+                    throw new AgeTooLowException("to small");
                 }
                 else if (age < 0)
                 {
-                    throw new AgeTooHighException("AgeTooHighException");
+                    throw new AgeTooHighException("to old");
                 }
                 else
                 {
@@ -42,10 +47,31 @@ namespace _04Prokhorov.ViewModel
             return false;
         }
 
-        internal static IEnumerable GenerateData()
+        public static void SaveData()
         {
-            //create 50 person list 
-            List<Person> people = new List<Person>
+            var formatter = new BinaryFormatter();
+            using (var stream = new FileStream("data.dat", FileMode.Create))
+            {
+                formatter.Serialize(stream, Persons);
+            }
+        }
+
+        public static void LoadData()
+        {
+            if (File.Exists("data.dat"))
+            {
+                var formatter = new BinaryFormatter();
+ 
+                using (var stream = new FileStream("data.dat", FileMode.Open))
+                {
+                    Persons = (List<Person>)formatter.Deserialize(stream);
+                }
+            }
+        }
+
+        internal static void GenerateData()
+        {
+            List<Person> p = new List<Person>
             {
                 new Person("John"       ,"Doe"      ,"1@google.com"     ,new DateTime(1991, 11, 21)),
                 new Person("Jane"       ,"Doe"      ,"2@google.com"     ,new DateTime(2005, 5, 10)),
@@ -99,13 +125,11 @@ namespace _04Prokhorov.ViewModel
                 new Person("Grace"      ,"Li"       ,"73@google.com"    ,new DateTime(2006, 7, 8))
             };
 
-            return people.AsEnumerable();
+            Persons = p;
         }
 
         internal static void SortHandler(object sender, DataGridSortingEventArgs e)
         {
-            //use LINQ to sort
-
             var data = (IEnumerable<Person>)((DataGrid)sender).ItemsSource;
             var sortMemberPath = e.Column.SortMemberPath;
 
@@ -125,5 +149,24 @@ namespace _04Prokhorov.ViewModel
             ((DataGrid)sender).ItemsSource = sortedData;
         }
 
+        internal static void AddPerson(Person person)
+        {
+            Persons.Add(person);
+        }
+
+        internal static void RemovePerson(Person person)
+        {
+            Persons.RemoveAll(x => x.Name == person.Name && x.Surname == person.Surname && x.DateOfBirth == person.DateOfBirth && x.EmailAddress == person.EmailAddress);
+        }
+
+        internal static void UpdatePerson(Person person)
+        {
+            var index = Persons.FindIndex(x => x.Name == person.Name && x.Surname == person.Surname);
+            if (index >= 0 && index < Persons.Count)
+            {
+                Persons[index] = person;
+            }
+         
+        }
     }
 }
